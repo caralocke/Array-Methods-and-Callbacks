@@ -27,20 +27,26 @@ Use getFinals to do the following:
 
 hint - you should be looking at the stage key inside of the objects
 */
-
+// not reading passed? <-----------------------------------------------------------------------------------------------
 function getFinals(data) {
- /* code here */
+ const madeFinals = fifaData.filter(function(item){
+     return item.Stage === 'Final';
+ })
+ 
+ console.log(madeFinals);
 }
-
+//<--------------------------------------------------------------------------------------------------------------------
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher-order function called getYears to do the following: 
 1. Receive an array
 2. Receive a callback function getFinals from task 2 
 3. Return an array called years containing all of the years in the getFinals data set*/
 
-function getYears(array, cb) {
-    /* code here */
+function getYears(array, cbFunction) {
+    const years = fifaData.map(item => item.Year);
+    return years
 }
+console.log(getYears(fifaData, getFinals));
 
 
 
