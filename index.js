@@ -57,14 +57,17 @@ Use the higher-order function getWinners to do the following:
 3. Determines the winner (home or away) of each `finals` game. 
 4. Returns the names of all winning countries in an array called `winners` */ 
 
-function getWinners(arr, cbFunction) {
-    const winners = fifaData.filter(function(item){
-        return item['Home Team Goals'] > item['Away Team Goals'];
-    })
-    const winnerNames = winners.map(function(item){
-        return item['Home Team Name']
-    })
-    return winnerNames;
+function getWinners(arr, getFinalsCb) {
+    const winners = [];
+
+    getFinalsCb(arr).forEach(function(madeFinals){
+        if(madeFinals['Home Team Goals'] > madeFinals['Away Team Goals']){
+            winners.push(madeFinals['Home Team Name']);
+        }else {
+            winners.push(madeFinals['Away Team Name']);
+        };
+    });
+    return winners;
 }
 
 
@@ -78,11 +81,20 @@ Use the higher-order function getWinnersByYear to do the following:
 
 hint: the strings returned need to exactly match the string in step 4.
  */
+//<----------------------------------------------------------------------------------------------------------------------------------------------------
+function getWinnersByYear(arr, getYearsCb, getWinnersCb) {
+    const wonWhen = [];
+    const years = getYearsCb(arr);
+    
+    console.log(years);
 
-function getWinnersByYear(arr, cbFunction, cbFunction2) {
-    /* code here */
+    const winners = getWinnersCb(arr);
+    winners.forEach(function (item, index){
+        wonWhen.push(`In ${years[index]}, ${item} won the world cup!`)
+    });
+    return wonWhen;
 }
-
+//<----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -94,11 +106,11 @@ Use the higher order function getAverageGoals to do the following:
  
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
-
-function getAverageGoals(/* code here */) {
-   /* code here */
+//<----------------------------------------------------------------------------------------------------------------------------------------------------
+function getAverageGoals(cbFunction) {
+   const averageHomeGoals = fifaData.reduce(function(acc, item){})
 }
-
+//<----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
